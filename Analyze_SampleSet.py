@@ -10,7 +10,7 @@ args = parser.parse_args()
 
 assert os.path.exists(args.SoundSamplesFolder), "[ERROR] Folder not found: {}".format(args.SoundSamplesFolder)
 
-SampleAnalysisDataFolder=os.path.join(os.path.dirname(__file__), "SampleAnalysisData_Simple")
+SampleAnalysisDataFolder=os.path.join(os.path.dirname(__file__), "SampleAnalysisData")
 os.makedirs(SampleAnalysisDataFolder, exist_ok=True)
 os.makedirs(os.path.join(SampleAnalysisDataFolder, "Samples"), exist_ok=True)
 
