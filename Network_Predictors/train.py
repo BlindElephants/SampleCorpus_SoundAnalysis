@@ -1,7 +1,7 @@
 import json
 import os
+import argparse
 
-import argparse 
 parser = argparse.ArgumentParser()
 parser.add_argument("--hidden_size", type=int, default=256)
 parser.add_argument("--lr", type=float, default=1e-5)
@@ -14,7 +14,6 @@ hidden_size=args.hidden_size
 lr=args.lr
 
 preppedFlattenedDataFilename= os.path.join(os.path.dirname(__file__), "..", "allDat_PreppedFlattened.json")
-
 with open(preppedFlattenedDataFilename, "r") as f: combinedSourceData = json.load(f)['COMBINES']
 print(len(combinedSourceData))
 
@@ -29,20 +28,16 @@ from random import shuffle
 shuffle(combined)
 combinedSourceData[:], tsneEmbeddings[:] = zip(*combined)
 
-
 import torch
 import torch.nn as nn
 from torch import optim
-
 import Latent_Predictor_FromAnalysis as Model
 
 m = Model.LatentPredictorFromAnalysis(len(combinedSourceData[0]), hidden_size=hidden_size, tsne_dimensions=len(tsneEmbeddings[0])).cuda()
 print(m)
 
 optimizer = optim.Adam(m.parameters(), lr=lr, weight_decay=args.weight_decay)
-
 tsneCrit = nn.L1Loss()
-
 n_epochs = args.n_epochs
 batchsize=args.batch_size
 
@@ -55,8 +50,8 @@ valStartIdx = (numfullbatches-1)*batchsize
 validationInp =  combinedSourceData[valStartIdx:]
 validationTsne= tsneEmbeddings[valStartIdx:]
 
-allTrainingLosses = []
-allValidationLosses = []
+allTrainingLosses  =[]
+allValidationLosses=[]
 
 for epoch in range(n_epochs):
     epochLoss = 0.0
@@ -64,14 +59,11 @@ for epoch in range(n_epochs):
     for b in range(numfullbatches-1):
         inp = combinedSourceData[b*batchsize:(b+1)*batchsize]
         tsneTar = tsneEmbeddings[b*batchsize:(b+1)*batchsize]
-
         inp = torch.tensor(inp, dtype=torch.float).cuda()
         tsneTar=torch.tensor(tsneTar, dtype=torch.float).cuda()
         tsneOut = m(inp, batchsize)
-
         optimizer.zero_grad()
         loss = tsneCrit(tsneOut, tsneTar)
-
         loss.backward()
         optimizer.step()
 

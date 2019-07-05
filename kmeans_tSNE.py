@@ -9,8 +9,8 @@ from matplotlib.colors import hsv_to_rgb
 with open("tSNE_Embeddings.json", "r") as f:
     dat = json.load(f)
 
-# n_clusters = [2, 3, 4, 8, 12, 16, 20, 24, 30, 40, 60, 80, 120, 200, 500]
-n_clusters = [500]
+n_clusters = [2, 3, 4, 8, 12, 16, 20, 24, 30, 40, 60, 80, 120, 200, 500]
+# n_clusters = [500]
 
 for key, val in dat.items():
     if key != "NAMES":
@@ -31,7 +31,7 @@ for key, val in dat.items():
                 'source': key,
                 'n_clusters': nc,
                 'out_predict': out_predict.tolist(),
-                'out_transform': out_transform.tolist()
+                # 'out_transform': out_transform.tolist()
             }
 
             filename = key+"_"+str(nc)
