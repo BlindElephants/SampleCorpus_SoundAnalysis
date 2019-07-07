@@ -5,7 +5,7 @@ class FindSimilarSamples():
         self.ClusteringSourceSize=ClusteringSourceSize
         assert self.ClusteringSourceSize in [2, 3, 4, 8, 12, 16, 20, 24, 30, 40, 60, 80, 120, 200, 500]
         print("Checking if TidalToFilenames.json exists.")
-        TidalToFilenamesFilePath=os.path.join(os.path.dirname(__file__), "TidalToFilenames.json")
+        TidalToFilenamesFilePath=os.path.join(os.path.dirname(__file__), "..", "Helpers", "TidalToFilenames.json")
         assert os.path.exists(TidalToFilenamesFilePath)
         
         print("Loading Tidal names to filenames conversion tables.")
@@ -17,7 +17,7 @@ class FindSimilarSamples():
 
         print("Loading Cluster Data.")
 
-        clusteringDatPath=os.path.join(os.path.dirname(__file__))
+        clusteringDatPath=os.path.join(os.path.dirname(__file__), "..", "Clustering", "JSON")
 
         with open(os.path.join(clusteringDatPath, "COMBINES_TSNE_"+str(ClusteringSourceSize)+".json"), "r") as f:
             self.combines_dat=json.load(f)
