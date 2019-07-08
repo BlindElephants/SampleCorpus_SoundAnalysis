@@ -6,7 +6,7 @@ The code in this repo is used to analyze sound samples that are used during Tida
 
 - Python 3.6 or 3.7
 - Librosa
-    - can be installed via pip / pip3: ```pip install librosa```
+    - can be installed via pip / pip3: ```pip3 install librosa```
 
 ## Analyzing Sound Samples
 
@@ -39,7 +39,7 @@ SoundSamplesFolder
 run ```Analyze_SampleSet.py``` with python3, specifying the location of this SoundSamplesFolder, for example:
 
 ```
-python Analyze_SampleSet.py /home/path/to/SoundSamplesFolder
+python3 Analyze_SampleSet.py /home/path/to/SoundSamplesFolder
 ```
 
 ## Output
